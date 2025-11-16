@@ -1,0 +1,170 @@
+# Sistema de Cadastro de Livros - Biblioteca Municipal
+
+Sistema CRUD desenvolvido em Spring Boot para gerenciar o acervo de livros da Biblioteca Municipal.
+
+## 📋 Requisitos
+
+- Java 17 ou superior
+- Maven 3.6 ou superior
+
+## 🚀 Instalação e Execução
+
+### 1. Clone o repositório (se aplicável)
+```bash
+git clone <url-do-repositorio>
+cd biblioteca
+```
+
+### 2. Compile o projeto
+```bash
+mvn clean install
+```
+
+### 3. Execute a aplicação
+```bash
+mvn spring-boot:run
+```
+
+A aplicação estará disponível em: `http://localhost:8080`
+
+## 🏗️ Arquitetura
+
+O projeto está organizado em 4 camadas conforme especificado:
+
+### 1. **Interface (API)** - `marcos.ifpb.biblioteca.api`
+- `LivroController`: Endpoints REST da API
+- `GlobalExceptionHandler`: Tratamento centralizado de exceções
+
+### 2. **Aplicação** - `marcos.ifpb.biblioteca.aplicacao`
+- `LivroService`: Regras de controle de solicitações com `@Transactional`
+
+### 3. **Domínio** - `marcos.ifpb.biblioteca.dominio`
+- `modelo.Livro`: Entidade de domínio com regras de negócio
+- `repositorio.LivroRepository`: Interface do repositório
+- `excecao.*`: Exceções de domínio (LivroNaoEncontradoException, IsbnJaExistenteException)
+
+### 4. **Infraestrutura** - `marcos.ifpb.biblioteca.infraestrutura`
+- `config.JpaConfig`: Configurações do Spring Data JPA
+- Spring Data JPA fornece automaticamente a implementação dos repositórios
+
+## 📚 Endpoints da API
+
+### Base URL: `http://localhost:8080/api/livros`
+
+#### 1. Cadastrar Livro
+```http
+POST /api/livros
+Content-Type: application/json
+
+{
+  "isbn": 1234567890,
+  "titulo": "Dom Casmurro",
+  "autor": "Machado de Assis",
+  "anoDePublicacao": 1899,
+  "quantidadeEstoque": 10
+}
+```
+
+#### 2. Listar Todos os Livros
+```http
+GET /api/livros
+```
+
+#### 3. Buscar Livro por ID
+```http
+GET /api/livros/{id}
+```
+
+#### 4. Buscar Livro por ISBN
+```http
+GET /api/livros/isbn/{isbn}
+```
+
+#### 5. Atualizar Livro
+```http
+PUT /api/livros/{id}
+Content-Type: application/json
+
+{
+  "isbn": 1234567890,
+  "titulo": "Dom Casmurro - Edição Especial",
+  "autor": "Machado de Assis",
+  "anoDePublicacao": 1899,
+  "quantidadeEstoque": 15
+}
+```
+
+#### 6. Remover Livro
+```http
+DELETE /api/livros/{id}
+```
+
+## ✅ Funcionalidades Implementadas
+
+### RF01 - Cadastrar Livro
+- ✅ Sistema permite cadastrar novo livro
+- ✅ Campos: título, autor, ISBN, ano de publicação, quantidade em estoque
+- ✅ ISBN deve ser único (validação implementada)
+
+### RF02 - Listar Livros
+- ✅ Sistema lista todos os livros cadastrados
+- ✅ Sistema busca livro por ID
+- ✅ Sistema busca livro por ISBN
+
+### RF03 - Atualizar Livro
+- ✅ Sistema permite atualizar dados de um livro existente
+- ✅ Não permite alterar ISBN para um já existente
+
+### RF04 - Remover Livro
+- ✅ Sistema permite remover um livro do catálogo
+- ✅ Valida se o livro existe antes de remover
+
+## 🧪 Testes
+
+Execute os testes unitários com:
+```bash
+mvn test
+```
+
+Os testes cobrem todas as operações CRUD:
+- ✅ Criar livro (sucesso e validação de ISBN duplicado)
+- ✅ Buscar por ID (sucesso e livro não encontrado)
+- ✅ Buscar por ISBN (sucesso e livro não encontrado)
+- ✅ Listar todos os livros
+- ✅ Atualizar livro (sucesso, livro não encontrado, ISBN duplicado)
+- ✅ Remover livro (sucesso e livro não encontrado)
+
+## 🗄️ Banco de Dados
+
+O projeto utiliza **H2 Database** (banco em memória).
+
+### Acessar Console H2
+1. Execute a aplicação
+2. Acesse: `http://localhost:8080/h2-console`
+3. JDBC URL: `jdbc:h2:mem:biblioteca`
+4. Username: `sa`
+5. Password: (deixe em branco)
+
+## 🛠️ Stack Tecnológica
+
+- **Java 17+**
+- **Spring Boot 3.5.7**
+- **Spring Data JPA**
+- **H2 Database** (banco em memória)
+- **JUnit 5** e **Mockito** (testes)
+- **Maven** (gerenciamento de dependências)
+- **Lombok** (redução de boilerplate)
+- **Spring Validation** (validação de dados)
+
+## 📝 Observações
+
+- Todas as operações de escrita utilizam `@Transactional` na camada de aplicação
+- A API está preparada e resolvida na camada de interface
+- A implementação do repositório é fornecida automaticamente pelo Spring Data JPA na camada de infraestrutura
+- Validações de negócio estão implementadas no domínio e aplicação
+- Tratamento de exceções centralizado na camada de interface
+
+## 👤 Autor
+
+Desenvolvido como parte da atividade acadêmica.
+
