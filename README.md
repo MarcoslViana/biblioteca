@@ -156,15 +156,3 @@ O projeto utiliza **H2 Database** (banco em memória).
 - **Lombok** (redução de boilerplate)
 - **Spring Validation** (validação de dados)
 
-## 📝 Observações
-
-- Todas as operações de escrita utilizam `@Transactional` na camada de aplicação
-- A API está preparada e resolvida na camada de interface
-- A implementação do repositório é fornecida automaticamente pelo Spring Data JPA na camada de infraestrutura
-- Validações de negócio estão implementadas no domínio e aplicação
-- Tratamento de exceções centralizado na camada de interface
-
-## 👤 Autor
-
-Desenvolvido como parte da atividade acadêmica.
-
