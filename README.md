@@ -27,25 +27,6 @@ mvn spring-boot:run
 
 A aplicação estará disponível em: `http://localhost:8080`
 
-## 🏗️ Arquitetura
-
-O projeto está organizado em 4 camadas conforme especificado:
-
-### 1. **Interface (API)** - `marcos.ifpb.biblioteca.api`
-- `LivroController`: Endpoints REST da API
-- `GlobalExceptionHandler`: Tratamento centralizado de exceções
-
-### 2. **Aplicação** - `marcos.ifpb.biblioteca.aplicacao`
-- `LivroService`: Regras de controle de solicitações com `@Transactional`
-
-### 3. **Domínio** - `marcos.ifpb.biblioteca.dominio`
-- `modelo.Livro`: Entidade de domínio com regras de negócio
-- `repositorio.LivroRepository`: Interface do repositório
-- `excecao.*`: Exceções de domínio (LivroNaoEncontradoException, IsbnJaExistenteException)
-
-### 4. **Infraestrutura** - `marcos.ifpb.biblioteca.infraestrutura`
-- `config.JpaConfig`: Configurações do Spring Data JPA
-- Spring Data JPA fornece automaticamente a implementação dos repositórios
 
 ## 📚 Endpoints da API
 
@@ -98,26 +79,6 @@ Content-Type: application/json
 ```http
 DELETE /api/livros/{id}
 ```
-
-## ✅ Funcionalidades Implementadas
-
-### RF01 - Cadastrar Livro
-- ✅ Sistema permite cadastrar novo livro
-- ✅ Campos: título, autor, ISBN, ano de publicação, quantidade em estoque
-- ✅ ISBN deve ser único (validação implementada)
-
-### RF02 - Listar Livros
-- ✅ Sistema lista todos os livros cadastrados
-- ✅ Sistema busca livro por ID
-- ✅ Sistema busca livro por ISBN
-
-### RF03 - Atualizar Livro
-- ✅ Sistema permite atualizar dados de um livro existente
-- ✅ Não permite alterar ISBN para um já existente
-
-### RF04 - Remover Livro
-- ✅ Sistema permite remover um livro do catálogo
-- ✅ Valida se o livro existe antes de remover
 
 ## 🧪 Testes
 
