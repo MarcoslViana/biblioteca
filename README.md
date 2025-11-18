@@ -9,7 +9,7 @@ Sistema CRUD desenvolvido em Spring Boot para gerenciar o acervo de livros da Bi
 
 ## 🚀 Instalação e Execução
 
-### 1. Clone o repositório (se aplicável)
+### 1. Clone o repositório
 ```bash
 git clone <url-do-repositorio>
 cd biblioteca
